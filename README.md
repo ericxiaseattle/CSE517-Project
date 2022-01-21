@@ -1,6 +1,6 @@
 # CSE517 Project
 
-We attempt to reproduce the experiments described in [this EMNLP 2021 paper](https://aclanthology.org/2021.emnlp-main.10.pdf), Decision-Focused Summarizationm, by Chao-Chun Hsu and Chenhao Tan.
+We attempt to reproduce the experiments described in [this EMNLP 2021 paper](https://aclanthology.org/2021.emnlp-main.10.pdf), Decision-Focused Summarization, by Chao-Chun Hsu and Chenhao Tan.
 
 Some links to refer to for later:
 * [https://cloud.google.com/compute/gpus-pricing](https://cloud.google.com/compute/gpus-pricing)
