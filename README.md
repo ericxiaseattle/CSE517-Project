@@ -17,9 +17,62 @@ python -m spacy download en_core_web_sm
 pip install torch==1.7.0+cu110 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 ## Preprocessing
-We download the [yelp dataset](https://www.yelp.com/dataset/download) and only select reviews from restaurants to build our dataset. At the base directory, run 
+We download the [yelp dataset](https://www.yelp.com/dataset/download) and only select reviews from restaurants to build our dataset. The preprocessing script
+effectively reads in the 52268 restaurants and associated reviews from the dataset and computes the average of the first 50 reviews. At the base directory, run 
 ```
 python -m preprocess.yelp_preprocess --yelp_data_dir YELP_DATA_DIR --output_dir OUTPUT_DIR
 ```
 
-## 
+## Training Longformer Model
+Run the command
+```
+sudo bash scripts/train_transformer.sh
+```
+The trained model will be saved to a path like `${OUTPUT_DIR}/version_27-12-2021--16-59-15/checkpoints/epoch=1-val_loss=0.12.ckpt`. 
+
+## Running DecSum
+We run
+```
+sudo bash scripts/sentence_selection.sh
+```
+The DecSum summaries will be saved at `${RES_DIR}/models/sentence_select/selected_sentence/yelp/50reviews/test/Transformer/window_1_DecSum_WD_sentbert_50trunc_1_1_1/best/1/text_.csv`.
+
+*_MSE with True Label_* metric will be store at `${RES_DIR}/models/sentence_select/results/yelp/50reviews/test/Transformer/window_1_DecSum_WD_sentbert_50trunc_1_1_1/best/1/text_.csv`.
+
+## Computing Decision Scores for Individual Sentences
+```
+sudo bash scripts/single_sentence_score.sh
+```
+Results will be saved at `${RES_DIR}/models/sentence_select/selected_sentence/yelp/50reviews/test/Transformer/window_1/order/10000/text_.csv`.
+Sentences are in the original order for each restaurants (business).
+
+## Additional Experiments 
+We carried out experiments beyond the scope of the paper to test the effect of certain hyperparameters on the result. These were done by modifying the parameters in `sentence_select.sh` (e.g. `num_sentences`, `num_review`) and `train_transformer.sh` (e.g. `max_seq_length`). 
+
+## Computing Wasserstein Distances
+Rename the result of `single_sentence_score.sh` to `all.csv`. Store the DecSum summaries and `all.csv` into an input directory. Then run 
+```
+python wasserstein.py PATH/TO/INPUT/DIRECTORY
+```
+
+## Generating PDF Plot
+```
+python pdf.py
+```
+
+## Citation of Authors' Paper
+```
+@inproceedings{hsu-tan-2021-decision,
+    title = "Decision-Focused Summarization",
+    author = "Hsu, Chao-Chun  and
+      Tan, Chenhao",
+    booktitle = "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2021",
+    address = "Online and Punta Cana, Dominican Republic",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.emnlp-main.10",
+    doi = "10.18653/v1/2021.emnlp-main.10",
+    pages = "117--132",
+}
+```
