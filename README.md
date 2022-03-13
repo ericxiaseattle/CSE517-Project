@@ -28,7 +28,8 @@ Run the command
 ```
 sudo bash scripts/train_transformer.sh
 ```
-The trained model will be saved to a path like `${OUTPUT_DIR}/version_27-12-2021--16-59-15/checkpoints/epoch=1-val_loss=0.12.ckpt`. 
+The trained model will be saved to a path like 
+`${OUTPUT_DIR}/version_27-12-2021--16-59-15/checkpoints/epoch=1-val_loss=0.12.ckpt`. 
 
 ## Running DecSum
 We run
