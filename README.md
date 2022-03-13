@@ -1,4 +1,4 @@
-# CSE517 Project
+# CSE517:NLP Project
 
 We attempt to reproduce the experiments described in [this EMNLP 2021 paper](https://aclanthology.org/2021.emnlp-main.10.pdf), Decision-Focused Summarization, by Chao-Chun Hsu and Chenhao Tan, for our CSE517: Natural Language Processing class at the University of Washington. A writeup of our reproduction may be found [here](https://github.com/ericxiaseattle/CSE517-Project/raw/main/out/projectv2.pdf), and the directories assets, out, and src correspond to the different versions of our writeup.
 
