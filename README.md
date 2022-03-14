@@ -6,7 +6,7 @@ In our reproduction, we discovered that the authors' repo contains some code err
 All other directories are associated with DecSum, and as we were having problems pushing the directories OUTPUT_DIR, YELP_DATA_DIR, and results to Github due to their large file size, we have instead uploaded them to [MEGA](https://insertmegalinkhere.com). Some of the documentation in this README.md, when applicable, is copied from the authors' README.md on their repo.
 
 ## Environment
-First download the MEGA tar.gz archive to the working directory and uncompress it. Then run the following commands.
+First download the MEGA tar.gz archive and uncompress it, adding its contents to the working directory. Then run the following commands.
 ```
 conda create -n yelp python=3.7.6
 cat requirements.txt | sed -e '/^\s*#.*$/d' -e '/^\s*$/d' | xargs -n 1 python -m pip install
@@ -18,7 +18,7 @@ pip install torch==1.7.0+cu110 -f https://download.pytorch.org/whl/torch_stable.
 ```
 ## Preprocessing
 We download the [yelp dataset](https://www.yelp.com/dataset/download) and only select reviews from restaurants to build our dataset. The preprocessing script
-effectively reads in the 52268 restaurants and associated reviews from the dataset and computes the average of the first 50 reviews. At the base directory, run 
+effectively reads in the 52268 restaurants and associated reviews from the dataset and computes the average of the first 50 reviews. Download the yelp dataset to `YELP_DATA_DIR` and rename all the files inside to be of the example format `business.json` instead of the default format `yelp_academic_dataset_business.json`. At the base directory, run 
 ```
 python -m preprocess.yelp_preprocess --yelp_data_dir YELP_DATA_DIR --output_dir OUTPUT_DIR
 ```
