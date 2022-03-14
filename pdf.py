@@ -23,6 +23,8 @@ def main():
     plt.hlines(y=0.0, xmin=max(x), xmax=6)
     plt.title('Example Summaries for iHOP Restaurant')
 
+    # We arbitrarily chose the circles and stars representing selected sentences with DecSum and PreSumm on the plot, 
+    # as we couldn't figure out how these sentences were chosen in the original paper
     first, second, third = np.where(x>2)[0][0], np.where(x>4)[0][0], np.where(x>4.4)[0][0]
     decsum_dots = [x[first], x[second], x[third]], [y[first], y[second], y[third]]
     plt.plot(decsum_dots[0], decsum_dots[1], 'o', color='C0', ms=10, label='DecSum')
